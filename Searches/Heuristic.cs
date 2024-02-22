@@ -67,7 +67,7 @@ namespace Searches
                     {
                         if (!explored.Contains(child))
                         {
-                            frontier.Enqueue((child, distance + 1));
+                            frontier.Enqueue((child, distance + child.Cost));
                         }
                     }
                 }
