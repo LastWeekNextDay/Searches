@@ -79,7 +79,10 @@ namespace Searches
                             if (Heuristic.TryCalculateHeuristic(_heuristicType, child, value, out int h))
                             {
                                 child.Heuristic = h;
-                                frontier.Enqueue(child, child.TotalCost);
+                                if (h > -1)
+                                {
+                                    frontier.Enqueue(child, child.TotalCost);
+                                }
                             }
                             else
                             {
