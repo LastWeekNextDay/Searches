@@ -36,14 +36,14 @@ namespace Searches
                 throw new ArgumentNullException(nameof(value));
             }
 
-            Queue<(AStarNode<T> Node, int Distance)> frontier = new Queue<(AStarNode<T>, int)>();
+            Queue<(AStarNode<T> Node, int AccumulatedCost)> frontier = new Queue<(AStarNode<T>, int)>();
             frontier.Enqueue((node, 0));
 
             HashSet<AStarNode<T>> explored = new HashSet<AStarNode<T>>();
 
             while (frontier.Count > 0)
             {
-                (AStarNode<T> current, int distance) = frontier.Dequeue();
+                (AStarNode<T> current, int accumulatedCost) = frontier.Dequeue();
 
                 if (current == null)
                 {
@@ -54,7 +54,7 @@ namespace Searches
                 {
                     if (current.Value.Equals(value))
                     {
-                        num = distance;
+                        num = accumulatedCost;
                         return true;
                     }
                 }
@@ -67,7 +67,7 @@ namespace Searches
                     {
                         if (!explored.Contains(child))
                         {
-                            frontier.Enqueue((child, distance + child.Cost));
+                            frontier.Enqueue((child, accumulatedCost + child.Cost));
                         }
                     }
                 }
